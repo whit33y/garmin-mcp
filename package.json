@@ -17,12 +17,16 @@
     "setup": "node scripts/setup.js",
     "verify:garmin": "node scripts/verify-garmin.js",
     "config:claude": "node scripts/claude-config.js",
-    "plugin:build": "node scripts/build-plugin.js"
+    "plugin:build": "node scripts/build-plugin.js",
+    "plugin:build:claude": "node scripts/build-claude-extension.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",
     "express": "^5.1.0",
     "jose": "^6.2.13",
     "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "fflate": "^0.8.3"
   }
 }
