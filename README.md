@@ -87,6 +87,30 @@ Klucz Garmin pozostaje w `.env`; nie umieszczaj go w JSON konfiguracji Claude. D
 
 [Oficjalna instrukcja lokalnego MCP](https://modelcontextprotocol.io/docs/develop/connect-local-servers), [ustawienia i logi Claude Desktop](https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop).
 
+## Lokalny plugin dla ChatGPT Work / Codex i scheduled tasks
+
+Na komputerze z tym repozytorium możesz zainstalować osobisty plugin **Garmin** bez hostingu i OAuth. Aplikacja uruchamia MCP przez stdio. Plugin korzysta z `.env`, zależności i bazy danych w tym katalogu; jego kopia instalacyjna nie zawiera kluczy ani pomiarów.
+
+```sh
+npm run plugin:build
+codex plugin marketplace add "$(pwd)/dist/garmin-marketplace"
+codex plugin add garmin@garmin-local
+```
+
+Jeśli dana wersja CLI nie obsługuje `plugin add`, po dodaniu marketplace otwórz Plugins w aplikacji desktopowej, wybierz źródło **Garmin — lokalne pluginy** i zainstaluj **Garmin**. Odśwież widok pluginów lub uruchom ponownie aplikację, jeśli źródło jeszcze się nie pojawiło.
+
+W nowym lokalnym czacie wybierz plugin Garmin i poproś: „Wywołaj `server_status`, potem podsumuj moją regenerację z dzisiaj”. Oczekiwany tryb to `GARMIN`; dane demo mają oznaczenie `DEMO_SYNTHETIC_DATA`.
+
+Plugin udostępnia też skill `$garmin-report`. Przykładowy prompt scheduled task:
+
+> Użyj pluginu Garmin i skilla $garmin-report. Przygotuj poranny raport dzisiejszej regeneracji oraz propozycję treningu. Oblicz datę dla bieżącego uruchomienia w strefie czasowej serwera. Pisz krótko po polsku i pokaż braki lub niepełną synchronizację. Odczytuj dane bez zmiany planu treningowego.
+
+Najpierw sprawdź prompt w zwykłej rozmowie. Następnie poproś w aplikacji o uruchamianie go o wybranej godzinie jako **lokalny** scheduled task, z dostępnym pluginem Garmin. Komputer musi być włączony i aktywny, a aplikacja uruchomiona. Ta instrukcja ani `plugin:build` nie tworzą harmonogramu.
+
+Pakiet w `dist/garmin-marketplace` jest powiązany z pełną ścieżką tego checkoutu i rzeczywistego pliku Node. Zachowaj ten katalog marketplace oraz repozytorium. Po przeniesieniu projektu lub zmianie Node wygeneruj pakiet ponownie i odśwież instalację pluginu. Plugin jest przeznaczony do lokalnego wykonania w aplikacji desktopowej; uruchomienie w chmurze wymaga wariantu HTTP z kolejnej sekcji.
+
+Źródła: [pakowanie i instalacja lokalnych pluginów](https://developers.openai.com/plugins/build/plugins), [lokalne MCP przez stdio](https://developers.openai.com/plugins/deploy/desktop-only), [scheduled tasks i pluginy](https://learn.chatgpt.com/docs/automations).
+
 ## Przygotowanie zdalnego serwera dla ChatGPT i Claude
 
 ```sh

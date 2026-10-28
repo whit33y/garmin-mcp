@@ -1,0 +1,19 @@
+{
+  "name": "garmin",
+  "version": "0.1.0",
+  "description": "Analiza treningów i regeneracji z Garmin Connect, także w lokalnych scheduled tasks.",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "requires_local_executor": true,
+  "interface": {
+    "displayName": "Garmin",
+    "shortDescription": "Treningi, sen i regeneracja z Garmin Connect",
+    "longDescription": "Osobisty lokalny serwer Garmin MCP. Analizuje treningi, sen, HRV, stres i Body Battery oraz obsługuje propozycje planów treningowych. Korzysta z konfiguracji i danych w Twoim katalogu garmin-mcp.",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": [
+      "Podsumuj moją dzisiejszą regenerację z Garmin.",
+      "Użyj $garmin-report i podsumuj ostatni zakończony tydzień treningowy."
+    ]
+  }
+}
